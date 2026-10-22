@@ -1,0 +1,67 @@
+{
+  "protocol_version": "1.0",
+  "registered_at": "2026-10-16",
+  "analysis_status": "not_started",
+  "metadata_snapshot_id": "INPHARED2_online_2026-10-03_export_2026-10-16",
+  "seed": 30102026,
+  "primary_baltimore_groups": [
+    "Group I",
+    "Group II"
+  ],
+  "primary_checkv_quality": [
+    "Complete",
+    "High-quality"
+  ],
+  "disallow_miuvig_genome_fragment_in_primary": true,
+  "host_domain_required": "Bacteria",
+  "pilot_n": 100,
+  "stress_n": 500,
+  "stress_extension_n": 1000,
+  "pilot_length_bins_bp": [
+    0,
+    10000,
+    50000,
+    100000,
+    200000,
+    null
+  ],
+  "pilot_min_per_nonempty_bin": 5,
+  "coordinate_system": "0-based half-open; ordered segments in transcription direction",
+  "native_caller_settings": true,
+  "partial_overlap_reciprocal_primary": 0.8,
+  "partial_overlap_reciprocal_sensitivity": [
+    0.5,
+    0.9
+  ],
+  "short_protein_threshold_aa": 100,
+  "phrogs_primary_evalue_max": 1e-05,
+  "phrogs_primary_query_coverage_min": 0.5,
+  "phrogs_primary_profile_coverage_min": 0.5,
+  "phrogs_thresholds_status": "investigator_prespecified; not validated biological truth",
+  "phold_screen_evalue_max": 0.001,
+  "phold_confirmation_query_coverage_min": 0.7,
+  "phold_confirmation_target_coverage_min": 0.7,
+  "cluster_bootstrap_aggregate_replicates": 2000,
+  "manual_review_target_loci": 30,
+  "manual_review_random_loci": 10,
+  "phold_sample_target_proteins": 600,
+  "phold_sampling_seed": 30102026,
+  "phanotate_command": [
+    "/opt/conda/envs/phanotate/bin/python",
+    "/opt/conda/envs/phanotate/bin/phanotate.py"
+  ],
+  "phanotate_version_command": [
+    "/opt/conda/envs/phanotate/bin/python",
+    "-c",
+    "import importlib.metadata as m;print(m.version('phanotate'))"
+  ],
+  "phanotate_environment_command": [
+    "/opt/conda/envs/phanotate/bin/python",
+    "-c",
+    "import json,platform,importlib.metadata as m;print(json.dumps({'platform':platform.platform(),'python':platform.python_version(),'phanotate':m.version('phanotate')}))"
+  ],
+  "phanotate_wsl_bridge": false,
+  "caller_timeout_seconds": 900,
+  "max_workers": 3,
+  "run_profile": "linux_4_threads"
+}

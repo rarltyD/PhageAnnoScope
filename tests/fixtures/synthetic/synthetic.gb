@@ -1,0 +1,30 @@
+LOCUS       SYNTHETIC_A               36 bp    DNA     linear   SYN 01-JAN-2000
+DEFINITION  Artificial software test record, never a biological observation.
+ACCESSION   SYNTHETIC_A
+VERSION     SYNTHETIC_A.7
+KEYWORDS    .
+SOURCE      .
+  ORGANISM  .
+            .
+COMMENT     SYNTHETIC TEST FIXTURE ONLY; excluded from every research cohort
+FEATURES             Location/Qualifiers
+     source          1..36
+                     /organism="synthetic construct"
+                     /mol_type="other DNA"
+     gene            1..9
+                     /gene="artificial_a"
+     CDS             1..9
+                     /protein_id="DUPLICATE_FIXTURE_ID"
+                     /translation="MK"
+     tRNA            10..12
+     CDS             complement(13..21)
+                     /protein_id="DUPLICATE_FIXTURE_ID"
+                     /translation="MK"
+                     /transl_table=11
+     misc_feature    22..24
+     CDS             25..33
+                     /transl_table=11
+                     /translation="MP"
+ORIGIN
+        1 atgaaataac ccttatttca tcccgtgccc tgaccc
+//

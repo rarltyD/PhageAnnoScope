@@ -1,0 +1,25 @@
+{
+  "genbank_cds": 1921788,
+  "named": 654825,
+  "hypothetical_like": 1265958,
+  "no_product": 1005,
+  "named_specific": 480712,
+  "hyp_specific": 176230,
+  "top_reannotatable": {
+    "virion structural protein": 13223,
+    "minor tail protein": 8192,
+    "HNH endonuclease": 5335,
+    "membrane protein": 5133,
+    "tail fiber protein": 4448,
+    "Rz-like spanin": 3892,
+    "tail protein": 3632,
+    "holin": 3023,
+    "tail assembly chaperone": 2947,
+    "tail completion or Neck1 protein": 2762,
+    "exonuclease": 2657,
+    "transcriptional regulator": 2555,
+    "terminase small subunit": 2245,
+    "head protein": 2242,
+    "major head protein": 2216
+  }
+}

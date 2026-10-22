@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+data/
+logs/
+results/*/
+!results/statistics/
+!results/descriptive/
+!results/robustness/
+!results/phold/
+*.parquet
+!scripts/reproducibility/reference_calls.parquet
+*.duckdb

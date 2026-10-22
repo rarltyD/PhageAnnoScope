@@ -1,0 +1,16 @@
+[
+  {
+    "accession": "MK972686.1",
+    "start1": 39425,
+    "end": 39895,
+    "phrogs": "Rz-like spanin",
+    "evalue": 6.017903501879e-67
+  },
+  {
+    "accession": "ON117153.1",
+    "start1": 3327,
+    "end": 3674,
+    "phrogs": "holin",
+    "evalue": 3.2273313381030644e-61
+  }
+]

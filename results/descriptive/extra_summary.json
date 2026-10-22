@@ -1,0 +1,408 @@
+{
+  "genbank_cds": {
+    "n": 1921788,
+    "hypothetical_like_share": 0.6587396736788865,
+    "hypothetical_with_specific_phrogs": 0.13920682992642727,
+    "named_without_informative_phrogs_hit": 0.14269003168785555,
+    "top_hypothetical_to_category": {
+      "DNA, RNA and nucleotide metabolism": 44369,
+      "tail": 33955,
+      "head and packaging": 33087,
+      "other": 19160,
+      "moron, auxiliary metabolic gene and host takeover": 14429,
+      "connector": 11097,
+      "lysis": 9924,
+      "transcription regulation": 7510
+    }
+  },
+  "start_codons": {
+    "genbank": {
+      "ATG": 0.8592,
+      "GTG": 0.0992,
+      "TTG": 0.0391,
+      "NaN": 0.0015
+    },
+    "phanotate": {
+      "ATG": 0.8792,
+      "GTG": 0.0678,
+      "TTG": 0.0528,
+      "ATC": 0.0001
+    },
+    "pyrodigal_gv": {
+      "ATG": 0.8948,
+      "GTG": 0.0811,
+      "TTG": 0.0241
+    }
+  },
+  "gene_density": {
+    "genbank": {
+      "genomes": 17153,
+      "cds_per_kb_median": 1.505,
+      "cds_per_kb_q1": 1.351,
+      "cds_per_kb_q3": 1.671,
+      "protein_len_median": 130.0
+    },
+    "phanotate": {
+      "genomes": 17882,
+      "cds_per_kb_median": 1.695,
+      "cds_per_kb_q1": 1.514,
+      "cds_per_kb_q3": 1.876,
+      "protein_len_median": 113.0
+    },
+    "pyrodigal_gv": {
+      "genomes": 17882,
+      "cds_per_kb_median": 1.453,
+      "cds_per_kb_q1": 1.306,
+      "cds_per_kb_q3": 1.586,
+      "protein_len_median": 134.0
+    }
+  },
+  "by_lifestyle": [
+    {
+      "phageleads_lifestyle": "lytic",
+      "single_support": 0.185,
+      "no_specific": 0.686,
+      "genbank_vs_pyrodigal_gv": 0.93,
+      "genbank_vs_phanotate": 0.832,
+      "phanotate_vs_pyrodigal_gv": 0.815,
+      "genomes": 12484
+    },
+    {
+      "phageleads_lifestyle": "temperate",
+      "single_support": 0.2,
+      "no_specific": 0.634,
+      "genbank_vs_pyrodigal_gv": 0.921,
+      "genbank_vs_phanotate": 0.81,
+      "phanotate_vs_pyrodigal_gv": 0.8,
+      "genomes": 5181
+    },
+    {
+      "phageleads_lifestyle": "unknown",
+      "single_support": 0.0,
+      "no_specific": 0.0,
+      "genbank_vs_pyrodigal_gv": 0.6,
+      "genbank_vs_phanotate": 0.6,
+      "phanotate_vs_pyrodigal_gv": 1.0,
+      "genomes": 197
+    }
+  ],
+  "by_host_genus_top15": [
+    {
+      "metadata_host": "Mycobacterium",
+      "single_support": 0.201,
+      "no_specific": 0.642,
+      "genbank_vs_pyrodigal_gv": 0.922,
+      "genbank_vs_phanotate": 0.811,
+      "phanotate_vs_pyrodigal_gv": 0.798,
+      "genomes": 2279
+    },
+    {
+      "metadata_host": "Escherichia",
+      "single_support": 0.178,
+      "no_specific": 0.615,
+      "genbank_vs_pyrodigal_gv": 0.919,
+      "genbank_vs_phanotate": 0.835,
+      "phanotate_vs_pyrodigal_gv": 0.822,
+      "genomes": 2098
+    },
+    {
+      "metadata_host": "Pseudomonas",
+      "single_support": 0.207,
+      "no_specific": 0.735,
+      "genbank_vs_pyrodigal_gv": 0.922,
+      "genbank_vs_phanotate": 0.811,
+      "phanotate_vs_pyrodigal_gv": 0.793,
+      "genomes": 1345
+    },
+    {
+      "metadata_host": "Klebsiella",
+      "single_support": 0.167,
+      "no_specific": 0.603,
+      "genbank_vs_pyrodigal_gv": 0.922,
+      "genbank_vs_phanotate": 0.847,
+      "phanotate_vs_pyrodigal_gv": 0.833,
+      "genomes": 1327
+    },
+    {
+      "metadata_host": "Salmonella",
+      "single_support": 0.203,
+      "no_specific": 0.636,
+      "genbank_vs_pyrodigal_gv": 0.922,
+      "genbank_vs_phanotate": 0.8,
+      "phanotate_vs_pyrodigal_gv": 0.797,
+      "genomes": 1075
+    },
+    {
+      "metadata_host": "Vibrio",
+      "single_support": 0.192,
+      "no_specific": 0.765,
+      "genbank_vs_pyrodigal_gv": 0.926,
+      "genbank_vs_phanotate": 0.818,
+      "phanotate_vs_pyrodigal_gv": 0.807,
+      "genomes": 815
+    },
+    {
+      "metadata_host": "Staphylococcus",
+      "single_support": 0.148,
+      "no_specific": 0.644,
+      "genbank_vs_pyrodigal_gv": 0.943,
+      "genbank_vs_phanotate": 0.864,
+      "phanotate_vs_pyrodigal_gv": 0.852,
+      "genomes": 672
+    },
+    {
+      "metadata_host": "Gordonia",
+      "single_support": 0.204,
+      "no_specific": 0.709,
+      "genbank_vs_pyrodigal_gv": 0.933,
+      "genbank_vs_phanotate": 0.816,
+      "phanotate_vs_pyrodigal_gv": 0.796,
+      "genomes": 668
+    },
+    {
+      "metadata_host": "Microbacterium",
+      "single_support": 0.17,
+      "no_specific": 0.697,
+      "genbank_vs_pyrodigal_gv": 0.952,
+      "genbank_vs_phanotate": 0.846,
+      "phanotate_vs_pyrodigal_gv": 0.83,
+      "genomes": 583
+    },
+    {
+      "metadata_host": "Bacillus",
+      "single_support": 0.189,
+      "no_specific": 0.746,
+      "genbank_vs_pyrodigal_gv": 0.926,
+      "genbank_vs_phanotate": 0.824,
+      "phanotate_vs_pyrodigal_gv": 0.811,
+      "genomes": 436
+    },
+    {
+      "metadata_host": "Arthrobacter",
+      "single_support": 0.172,
+      "no_specific": 0.703,
+      "genbank_vs_pyrodigal_gv": 0.938,
+      "genbank_vs_phanotate": 0.844,
+      "phanotate_vs_pyrodigal_gv": 0.828,
+      "genomes": 427
+    },
+    {
+      "metadata_host": "Lactococcus",
+      "single_support": 0.167,
+      "no_specific": 0.625,
+      "genbank_vs_pyrodigal_gv": 0.944,
+      "genbank_vs_phanotate": 0.848,
+      "phanotate_vs_pyrodigal_gv": 0.833,
+      "genomes": 396
+    },
+    {
+      "metadata_host": "Acinetobacter",
+      "single_support": 0.186,
+      "no_specific": 0.635,
+      "genbank_vs_pyrodigal_gv": 0.931,
+      "genbank_vs_phanotate": 0.862,
+      "phanotate_vs_pyrodigal_gv": 0.815,
+      "genomes": 365
+    },
+    {
+      "metadata_host": "Streptomyces",
+      "single_support": 0.279,
+      "no_specific": 0.805,
+      "genbank_vs_pyrodigal_gv": 0.933,
+      "genbank_vs_phanotate": 0.742,
+      "phanotate_vs_pyrodigal_gv": 0.721,
+      "genomes": 362
+    },
+    {
+      "metadata_host": "Streptococcus",
+      "single_support": 0.212,
+      "no_specific": 0.525,
+      "genbank_vs_pyrodigal_gv": 0.933,
+      "genbank_vs_phanotate": 0.82,
+      "phanotate_vs_pyrodigal_gv": 0.789,
+      "genomes": 311
+    }
+  ],
+  "by_family_top12": [
+    {
+      "ncbi_family_metadata": "Unclassified",
+      "single_support": 0.194,
+      "no_specific": 0.691,
+      "genbank_vs_pyrodigal_gv": 0.926,
+      "genbank_vs_phanotate": 0.821,
+      "phanotate_vs_pyrodigal_gv": 0.806,
+      "genomes": 9784
+    },
+    {
+      "ncbi_family_metadata": "Straboviridae",
+      "single_support": 0.093,
+      "no_specific": 0.595,
+      "genbank_vs_pyrodigal_gv": 0.959,
+      "genbank_vs_phanotate": 0.916,
+      "phanotate_vs_pyrodigal_gv": 0.907,
+      "genomes": 929
+    },
+    {
+      "ncbi_family_metadata": "Autotranscriptaviridae",
+      "single_support": 0.192,
+      "no_specific": 0.509,
+      "genbank_vs_pyrodigal_gv": 0.917,
+      "genbank_vs_phanotate": 0.814,
+      "phanotate_vs_pyrodigal_gv": 0.807,
+      "genomes": 789
+    },
+    {
+      "ncbi_family_metadata": "Drexlerviridae",
+      "single_support": 0.149,
+      "no_specific": 0.609,
+      "genbank_vs_pyrodigal_gv": 0.931,
+      "genbank_vs_phanotate": 0.869,
+      "phanotate_vs_pyrodigal_gv": 0.851,
+      "genomes": 554
+    },
+    {
+      "ncbi_family_metadata": "Herelleviridae",
+      "single_support": 0.162,
+      "no_specific": 0.705,
+      "genbank_vs_pyrodigal_gv": 0.951,
+      "genbank_vs_phanotate": 0.843,
+      "phanotate_vs_pyrodigal_gv": 0.838,
+      "genomes": 548
+    },
+    {
+      "ncbi_family_metadata": "Autoscriptoviridae",
+      "single_support": 0.183,
+      "no_specific": 0.593,
+      "genbank_vs_pyrodigal_gv": 0.912,
+      "genbank_vs_phanotate": 0.828,
+      "phanotate_vs_pyrodigal_gv": 0.815,
+      "genomes": 505
+    },
+    {
+      "ncbi_family_metadata": "Demerecviridae",
+      "single_support": 0.283,
+      "no_specific": 0.697,
+      "genbank_vs_pyrodigal_gv": 0.908,
+      "genbank_vs_phanotate": 0.739,
+      "phanotate_vs_pyrodigal_gv": 0.717,
+      "genomes": 352
+    },
+    {
+      "ncbi_family_metadata": "Sarkviridae",
+      "single_support": 0.183,
+      "no_specific": 0.584,
+      "genbank_vs_pyrodigal_gv": 0.913,
+      "genbank_vs_phanotate": 0.816,
+      "phanotate_vs_pyrodigal_gv": 0.817,
+      "genomes": 297
+    },
+    {
+      "ncbi_family_metadata": "Schitoviridae",
+      "single_support": 0.207,
+      "no_specific": 0.743,
+      "genbank_vs_pyrodigal_gv": 0.917,
+      "genbank_vs_phanotate": 0.814,
+      "phanotate_vs_pyrodigal_gv": 0.792,
+      "genomes": 282
+    },
+    {
+      "ncbi_family_metadata": "Kyanoviridae",
+      "single_support": 0.19,
+      "no_specific": 0.634,
+      "genbank_vs_pyrodigal_gv": 0.894,
+      "genbank_vs_phanotate": 0.874,
+      "phanotate_vs_pyrodigal_gv": 0.809,
+      "genomes": 275
+    },
+    {
+      "ncbi_family_metadata": "Lindbergviridae",
+      "single_support": 0.263,
+      "no_specific": 0.752,
+      "genbank_vs_pyrodigal_gv": 0.957,
+      "genbank_vs_phanotate": 0.741,
+      "phanotate_vs_pyrodigal_gv": 0.738,
+      "genomes": 254
+    },
+    {
+      "ncbi_family_metadata": "Andersonviridae",
+      "single_support": 0.211,
+      "no_specific": 0.72,
+      "genbank_vs_pyrodigal_gv": 0.94,
+      "genbank_vs_phanotate": 0.79,
+      "phanotate_vs_pyrodigal_gv": 0.788,
+      "genomes": 243
+    }
+  ],
+  "by_record_year": [
+    {
+      "year_bin": "2021–2023",
+      "single_support": 0.193,
+      "no_specific": 0.672,
+      "genbank_vs_pyrodigal_gv": 0.932,
+      "genbank_vs_phanotate": 0.816,
+      "phanotate_vs_pyrodigal_gv": 0.807,
+      "genomes": 8086
+    },
+    {
+      "year_bin": "2016–2020",
+      "single_support": 0.185,
+      "no_specific": 0.672,
+      "genbank_vs_pyrodigal_gv": 0.932,
+      "genbank_vs_phanotate": 0.823,
+      "phanotate_vs_pyrodigal_gv": 0.815,
+      "genomes": 4421
+    },
+    {
+      "year_bin": "2024–2026",
+      "single_support": 0.187,
+      "no_specific": 0.657,
+      "genbank_vs_pyrodigal_gv": 0.911,
+      "genbank_vs_phanotate": 0.862,
+      "phanotate_vs_pyrodigal_gv": 0.812,
+      "genomes": 3775
+    },
+    {
+      "year_bin": "2011–2015",
+      "single_support": 0.192,
+      "no_specific": 0.658,
+      "genbank_vs_pyrodigal_gv": 0.911,
+      "genbank_vs_phanotate": 0.809,
+      "phanotate_vs_pyrodigal_gv": 0.807,
+      "genomes": 1302
+    },
+    {
+      "year_bin": "≤2010",
+      "single_support": 0.173,
+      "no_specific": 0.58,
+      "genbank_vs_pyrodigal_gv": 0.84,
+      "genbank_vs_phanotate": 0.722,
+      "phanotate_vs_pyrodigal_gv": 0.826,
+      "genomes": 278
+    }
+  ],
+  "unique_representative_proteins": {
+    "n": 1122903,
+    "status_share": {
+      "no_informative_hit": 0.3606,
+      "homology_unknown_function": 0.3372,
+      "specific_function": 0.3019,
+      "ambiguous": 0.0003
+    },
+    "specific_category_counts": {
+      "DNA, RNA and nucleotide metabolism": 99836,
+      "tail": 74569,
+      "head and packaging": 61251,
+      "other": 33867,
+      "lysis": 21466,
+      "moron, auxiliary metabolic gene and host takeover": 17723,
+      "connector": 13975,
+      "transcription regulation": 11554,
+      "integration and excision": 4717
+    }
+  },
+  "alt_start_phanotate_vs_pyrodigal": {
+    "n_pairs": 243706,
+    "median_diff_codons": 16.0,
+    "phanotate_longer_share": 0.4984694673089706
+  }
+}

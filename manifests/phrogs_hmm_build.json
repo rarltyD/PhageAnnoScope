@@ -1,0 +1,13 @@
+{
+  "source_archive": "data/db/phrogs_v4/MSA_phrogs.tar.gz",
+  "source_sha256": "1ca216aa830ebb94c925d2733c14d5870d3922bbe7a6eddffc66122cfc945923",
+  "builder": "pyhmmer.plan7.Builder defaults",
+  "pyhmmer_version": "0.12.3",
+  "hmmer_version": null,
+  "profiles_built": 38880,
+  "failed": [],
+  "limit": 0,
+  "wall_seconds": 2370.53,
+  "output": "data/db/phrogs_v4/phrogs_v4_m50.h3m",
+  "output_sha256": "9a210cd61cf590ba5c42e7fd8aafb49ef172ea4eb36294e6473acd44adb19aa3"
+}

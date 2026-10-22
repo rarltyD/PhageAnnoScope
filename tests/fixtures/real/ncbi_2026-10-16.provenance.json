@@ -1,0 +1,11 @@
+{
+  "kind": "real frozen NCBI GenBank response, not synthetic",
+  "retrieved_at_utc": "2026-10-16T08:07:35.403386+00:00",
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=J02459,J02482,V01146&rettype=gbwithparts&retmode=text&tool=PhageAnnoScope",
+  "sha256": "8351e2f89ecd52c74d14558f99f24554c0660e905fac687428e4b250c2a903cf",
+  "accession_versions": [
+    "J02459.1",
+    "J02482.1",
+    "V01146.1"
+  ]
+}

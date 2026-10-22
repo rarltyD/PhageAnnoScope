@@ -1,0 +1,15 @@
+{
+  "complete": "ATGAAATAA",
+  "reverse": "TTATTTCAT",
+  "origin_plus": "AAATAACCCATG",
+  "origin_minus": "CATGGGTTATTT",
+  "codon_start_2": "AATGAAATAA",
+  "codon_start_3": "AAATGAAATAA",
+  "gtg": "GTGAAATAA",
+  "table15": "ATGTAGTAA",
+  "internal_stop": "ATGTAATAG",
+  "invalid_symbol": "ATG?AATAA",
+  "partial": "AAA",
+  "ambiguous": "ATGNNNTAA",
+  "multi_feature_genome": "ATGAAATAACCCTTATTTCATCCCGTGCCCTGACCC"
+}

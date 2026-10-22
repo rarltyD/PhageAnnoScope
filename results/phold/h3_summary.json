@@ -1,0 +1,196 @@
+{
+  "n_sampled": 600,
+  "n_processed": 600,
+  "technical_failures": 0,
+  "strata": {
+    "support1_ge100_no_specific": {
+      "n": 100,
+      "eligible_in_frame": 1787,
+      "informative": 26,
+      "informative_prop": 0.26,
+      "informative_ci95": [
+        0.18404578126986462,
+        0.35371172631861636
+      ],
+      "confirmed": 18,
+      "confirmed_prop": 0.18,
+      "confirmed_ci95": [
+        0.11700131654251038,
+        0.26667536024213084
+      ]
+    },
+    "support1_ge100_specific": {
+      "n": 50,
+      "eligible_in_frame": 586,
+      "informative": 44,
+      "informative_prop": 0.88,
+      "informative_ci95": [
+        0.7619492111337642,
+        0.9438247628937535
+      ],
+      "confirmed": 42,
+      "confirmed_prop": 0.84,
+      "confirmed_ci95": [
+        0.7148551903823401,
+        0.9166267863791231
+      ],
+      "control_category_agreement": 43,
+      "control_agreement_prop": 0.86,
+      "control_agreement_ci95": [
+        0.738135428014719,
+        0.9304925473797714
+      ]
+    },
+    "support1_lt100_no_specific": {
+      "n": 100,
+      "eligible_in_frame": 19564,
+      "informative": 2,
+      "informative_prop": 0.02,
+      "informative_ci95": [
+        0.005501852234968185,
+        0.07001316294199365
+      ],
+      "confirmed": 2,
+      "confirmed_prop": 0.02,
+      "confirmed_ci95": [
+        0.005501852234968185,
+        0.07001316294199365
+      ]
+    },
+    "support1_lt100_specific": {
+      "n": 50,
+      "eligible_in_frame": 379,
+      "informative": 26,
+      "informative_prop": 0.52,
+      "informative_ci95": [
+        0.3851151225880844,
+        0.6520308760449429
+      ],
+      "confirmed": 25,
+      "confirmed_prop": 0.5,
+      "confirmed_ci95": [
+        0.36644286412332855,
+        0.6335571358766714
+      ],
+      "control_category_agreement": 25,
+      "control_agreement_prop": 0.5,
+      "control_agreement_ci95": [
+        0.36644286412332855,
+        0.6335571358766714
+      ]
+    },
+    "support2_ge100_no_specific": {
+      "n": 100,
+      "eligible_in_frame": 33101,
+      "informative": 38,
+      "informative_prop": 0.38,
+      "informative_ci95": [
+        0.2909744920013438,
+        0.47790426179289663
+      ],
+      "confirmed": 30,
+      "confirmed_prop": 0.3,
+      "confirmed_ci95": [
+        0.21894753866228117,
+        0.39585038432811953
+      ]
+    },
+    "support2_ge100_specific": {
+      "n": 50,
+      "eligible_in_frame": 29404,
+      "informative": 47,
+      "informative_prop": 0.94,
+      "informative_ci95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "confirmed": 47,
+      "confirmed_prop": 0.94,
+      "confirmed_ci95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "control_category_agreement": 47,
+      "control_agreement_prop": 0.94,
+      "control_agreement_ci95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ]
+    },
+    "support2_lt100_no_specific": {
+      "n": 100,
+      "eligible_in_frame": 26027,
+      "informative": 7,
+      "informative_prop": 0.07,
+      "informative_ci95": [
+        0.034318824364064096,
+        0.13749671006529757
+      ],
+      "confirmed": 7,
+      "confirmed_prop": 0.07,
+      "confirmed_ci95": [
+        0.034318824364064096,
+        0.13749671006529757
+      ]
+    },
+    "support2_lt100_specific": {
+      "n": 50,
+      "eligible_in_frame": 2542,
+      "informative": 28,
+      "informative_prop": 0.56,
+      "informative_ci95": [
+        0.4230578680014353,
+        0.6883801278976466
+      ],
+      "confirmed": 27,
+      "confirmed_prop": 0.54,
+      "confirmed_ci95": [
+        0.40398634328388083,
+        0.6703056539821737
+      ],
+      "control_category_agreement": 28,
+      "control_agreement_prop": 0.56,
+      "control_agreement_ci95": [
+        0.4230578680014353,
+        0.6883801278976466
+      ]
+    }
+  },
+  "gain_unweighted_all_no_specific": {
+    "n": 400,
+    "informative": 73,
+    "prop": 0.1825,
+    "ci95": [
+      0.14772676508161553,
+      0.2233137616991817
+    ],
+    "confirmed_prop": 0.1425
+  },
+  "gain_weighted_sample_frame": {
+    "informative_prop": 0.18956709203643193,
+    "confirmed_prop": 0.15488674064041558,
+    "note": "Hajek estimator, weights = 1/inclusion probability per stratum; frame = unique representative proteins of primary loci of the first nested sample (981 genomes) without specific PHROGs function; not generalized beyond this frame; no CI (approximate inclusion probabilities due to per-genome cap)."
+  },
+  "gain_by_function_status": {
+    "homology_unknown_function": {
+      "n": 178,
+      "informative_prop": 0.20224719101123595
+    },
+    "no_informative_hit": {
+      "n": 222,
+      "informative_prop": 0.16666666666666666
+    }
+  },
+  "top_new_categories": {
+    "DNA, RNA and nucleotide metabolism": 22,
+    "head and packaging": 17,
+    "other": 11,
+    "tail": 9,
+    "lysis": 4,
+    "transcription regulation": 4,
+    "moron, auxiliary metabolic gene and host takeover": 3,
+    "integration and excision": 2,
+    "connector": 1
+  },
+  "caveat": "Phold reference DB includes PHROG-derived annotations; agreement and gain are not independent validation. Functional assignment != experimental proof."
+}

@@ -1,0 +1,34 @@
+{
+  "host_taxid": "561",
+  "host_name": "Escherichia",
+  "host_domain": "Bacteria",
+  "host_domain_status": "verified",
+  "search_request": {
+    "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=taxonomy&term=%22Escherichia%22%5BScientific+Name%5D&retmode=xml&retmax=2&tool=PhageAnnoScope",
+    "started_at_utc": "2026-10-16T08:56:01.834009+00:00",
+    "http_status": 200,
+    "attempts": 1,
+    "ended_at_utc": "2026-10-16T08:56:07.801167+00:00"
+  },
+  "search_evidence": "/workspace/scratch/38a8d8f3a3b2/_work/codex_review/audit/host_taxonomy/taxonomy/754a9d5a62c3f39cc1a3d7c1feed820ca6da9b6630e62a268f7037aade33f8a2.xml",
+  "fetch_request": {
+    "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=561&retmode=xml&tool=PhageAnnoScope",
+    "started_at_utc": "2026-10-16T08:56:07.801702+00:00",
+    "http_status": 200,
+    "attempts": 1,
+    "ended_at_utc": "2026-10-16T08:56:13.123974+00:00"
+  },
+  "host_scientific_name": "Escherichia",
+  "host_taxonomy_lineage": [
+    "cellular organisms",
+    "Bacteria",
+    "Pseudomonadati",
+    "Pseudomonadota",
+    "Gammaproteobacteria",
+    "Enterobacterales",
+    "Enterobacteriaceae",
+    "Escherichia"
+  ],
+  "host_domain_evidence": "/workspace/scratch/38a8d8f3a3b2/_work/codex_review/audit/host_taxonomy/taxonomy/9f0b9c5c5028969e93146e577cfaab4eb45bcd837bedda5842e422dd369e7b80.xml",
+  "host_taxonomy_sha256": "9f0b9c5c5028969e93146e577cfaab4eb45bcd837bedda5842e422dd369e7b80"
+}

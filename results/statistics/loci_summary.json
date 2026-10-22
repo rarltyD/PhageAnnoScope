@@ -1,0 +1,25 @@
+{
+  "n_loci_primary": 2300621,
+  "support_counts": {
+    "2": 1858746,
+    "1": 441875
+  },
+  "single_support_by_caller": {
+    "phanotate_only": 387648,
+    "pyrodigal_gv_only": 54227
+  },
+  "median_length_aa_by_support": {
+    "1": 45.0,
+    "2": 137.0
+  },
+  "genbank_stop_match_by_support": {
+    "1": 0.313778783592645,
+    "2": 0.9405002082048866
+  },
+  "additional_vs_genbank_by_support": {
+    "1": 303147,
+    "2": 110568
+  },
+  "n_genomes": 17862,
+  "n_blocks": 4490
+}

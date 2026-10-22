@@ -1,0 +1,36 @@
+LOCUS       SYNTHETIC_PLUS            12 bp    DNA     circular SYN 01-JAN-2000
+DEFINITION  Artificial circular plus-strand software test, excluded from cohorts.
+ACCESSION   SYNTHETIC_PLUS
+VERSION     SYNTHETIC_PLUS.2
+KEYWORDS    .
+SOURCE      synthetic construct
+  ORGANISM  synthetic construct
+            .
+COMMENT     SYNTHETIC TEST FIXTURE ONLY
+FEATURES             Location/Qualifiers
+     source          1..12
+                     /organism="synthetic construct"
+                     /mol_type="other DNA"
+     CDS             join(10..12,1..6)
+                     /translation="MK"
+ORIGIN
+        1 aaataaccca tg
+//
+LOCUS       SYNTHETIC_MINUS           12 bp    DNA     circular SYN 01-JAN-2000
+DEFINITION  Artificial circular minus-strand software test, excluded from cohorts.
+ACCESSION   SYNTHETIC_MINUS
+VERSION     SYNTHETIC_MINUS.2
+KEYWORDS    .
+SOURCE      synthetic construct
+  ORGANISM  synthetic construct
+            .
+COMMENT     SYNTHETIC TEST FIXTURE ONLY
+FEATURES             Location/Qualifiers
+     source          1..12
+                     /organism="synthetic construct"
+                     /mol_type="other DNA"
+     CDS             complement(join(7..12,1..3))
+                     /translation="MK"
+ORIGIN
+        1 catgggttat tt
+//
