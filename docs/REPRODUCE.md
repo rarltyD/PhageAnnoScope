@@ -22,6 +22,7 @@ Pinned versions: Python 3.13.16, Biopython 1.88, pyarrow 25.0.0, duckdb 1.5.6, P
 ## 2. Cohort
 
 1. Download the GenBank records listed in `manifests/accessions_full_cohort.txt` from NCBI (`phageannoscope fetch-ncbi`, or E-utilities with `efetch -format gb`).
+   `scripts/pipeline/fetch_genbank_records.py` writes one file per accession in the layout of the validated manifest; the files are byte-identical to those of the study unless NCBI has updated a record. `scripts/pipeline/make_batch_manifests.py` then builds `manifests/batch1-4.csv` and reports any record whose file changed (its sequence checksum is still enforced).
 2. Run validation and the protocol amendments:
 
 ```bash
@@ -78,3 +79,28 @@ phold proteins-compare -i <run>/phold_sample/phold_sample.faa --predictions_dir 
 ```
 
 The script exits with code 0 only if the CDS calls are identical to the reference.
+
+## 8. Record age (exploratory)
+
+```bash
+P=.venv/bin/python
+$P scripts/record_age/fetch_genbank_metadata.py --mode headers  --accessions results/descriptive/per_genome_summary.csv --out data/raw/ncbi/headers
+$P scripts/record_age/fetch_genbank_metadata.py --mode features --accessions results/descriptive/per_genome_summary.csv --out data/raw/ncbi/features
+$P scripts/record_age/parse_record_metadata.py data/raw/ncbi/headers data/raw/ncbi/features results/record_age/record_metadata.csv.gz
+$P scripts/record_age/analyze_record_age.py results/descriptive/per_genome_summary.csv \
+    results/record_age/record_metadata.csv.gz manifests/cohort_manifest_validated.csv.gz results/record_age
+$P scripts/record_age/plot_record_age.py results/record_age/genome_table.csv.gz results/record_age
+```
+
+GenBank headers change when records are updated, so a later download can differ slightly from the snapshot of 2026-11-10 stored in `results/record_age/record_metadata.csv.gz`. The figure is written to `results/record_age/record_age_components.png` (`figures/fig12_record_age_components.png`).
+
+## 9. Consensus re-annotation (exploratory)
+
+Requires the merged run of step 5 with its PHROGs tables, and `results/record_age/genome_table.csv.gz`.
+
+```bash
+.venv/bin/python scripts/reannotation/reannotate.py results/full_cohort results/record_age/genome_table.csv.gz results/reannotation
+.venv/bin/python scripts/reannotation/summarize_reannotation.py results/reannotation results/full_cohort
+```
+
+The run takes about a minute and up to 6 GB of memory. The figure is written to `results/reannotation/reannotation.png` (`figures/fig13_consensus_reannotation.png`).

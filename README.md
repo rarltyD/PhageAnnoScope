@@ -1,8 +1,8 @@
 # PhageAnnoScope
 
-**Inter-tool disagreement in bacteriophage gene calling and functional uncertainty of phage proteins**
+**Inter-tool disagreement in bacteriophage gene calling, quality of GenBank phage records and consensus re-annotation**
 
-PhageAnnoScope is a reproducible comparison of the structural and functional annotation of 17,882 complete or high-quality genomes of DNA phages that infect bacteria (INPHARED2 / NCBI GenBank). CDS predicted by PHANOTATE and Pyrodigal-gv are compared with GenBank by exact coordinates and shared stop codons. Proteins are annotated with PHROGs v4 HMMs, and a probability sample is also annotated with Phold. The statistics use cluster-robust GEE, which accounts for relatedness between phages.
+PhageAnnoScope is a reproducible comparison of the structural and functional annotation of 17,882 complete or high-quality genomes of DNA phages that infect bacteria (INPHARED2 / NCBI GenBank). CDS predicted by PHANOTATE and Pyrodigal-gv are compared with GenBank by exact coordinates and shared stop codons. Proteins are annotated with PHROGs v4 HMMs, and a probability sample is also annotated with Phold. The statistics use cluster-robust GEE, which accounts for relatedness between phages. Two exploratory analyses extend the study: which GenBank records disagree with both callers and how this depends on record age, and a consensus re-annotation of all records.
 
 ## Key results
 
@@ -11,17 +11,27 @@ Full cohort: 17,862 genomes in the primary analysis, 2,300,621 stop-loci, 4,490 
 | Result | Value |
 |---|---|
 | Agreement (stop-codon Jaccard) | GenBank–Pyrodigal-gv 0.880; GenBank–PHANOTATE 0.798; PHANOTATE–Pyrodigal-gv 0.808 |
-| **H1:** support and function | No specific function in 95.3% of single-caller ORFs vs 64.0% of two-caller ORFs; adjusted OR 0.49 (95% CI 0.43–0.56); robust to PHROGs thresholds and length strata |
-| **H2:** length and overlaps | Single-caller support in 38.9% of ORFs < 100 aa vs 3.7% of longer ORFs; antisense overlap OR 43.9 |
-| **H3:** Phold | Function assigned to 18.2% (14.8–22.3%) of sampled proteins lacking one, mostly ≥ 100 aa |
-| **H4:** ORFs absent from GenBank | 6,399 ORFs in 3,986 fully annotated genomes match characterised PHROGs, mostly DNA metabolism and lysis |
+| Caller support and function | No specific function in 95.3% of single-caller ORFs vs 64.0% of two-caller ORFs; adjusted OR 0.49 (95% CI 0.43–0.56); robust to PHROGs thresholds and length strata |
+| Length and overlaps | Single-caller support in 38.9% of ORFs < 100 aa vs 3.7% of longer ORFs; antisense overlap OR 43.9 |
+| Structure-informed annotation (Phold) | Function assigned to 18.2% (14.8–22.3%) of sampled proteins lacking one, mostly ≥ 100 aa |
+| ORFs absent from GenBank | 6,399 ORFs in 3,986 fully annotated genomes match characterised PHROGs, mostly DNA metabolism and lysis |
 | GenBank "hypothetical" proteins | 65.9% of GenBank CDS; 13.9% of them have a specific PHROGs function |
+| Records discordant with both callers | 7.5% of genomes: 716 deposited without any CDS (peak 2020–2023, hybrid assemblies OR 7.3) and 623 annotated but discordant (submitted ≤2007 OR 5.6, 2008–2011 OR 4.2 versus 2020–2023) |
+| Consensus re-annotation | 21,353 GenBank CDS without caller or PHROGs support flagged; 6,983 functionally annotated genes proposed for 3,215 annotated records; 707 records (4.0%) need major revision |
 
 ![No specific PHROGs function by caller support and protein length](figures/fig4_h1_function_by_support.png)
 
 *Figure 4. Share of ORFs without a specific PHROGs function, split by caller support (left: by length class, 95% cluster-bootstrap CI) and the full functional status breakdown (right).*
 
-The full numbers are in [`docs/RESULTS.md`](docs/RESULTS.md), and all figures are in [`figures/`](figures/).
+The full numbers are in [`docs/RESULTS.md`](docs/RESULTS.md) and [`docs/RESULTS_EXPLORATORY.md`](docs/RESULTS_EXPLORATORY.md), and all figures are in [`figures/`](figures/).
+
+![Consensus re-annotation](figures/fig13_consensus_reannotation.png)
+
+*Figure 13. Consensus re-annotation: record classes by year of GenBank submission (a), PHROGs categories of genes proposed for annotated records (b), and length of GenBank CDS without any support (c).*
+
+## Consensus annotation
+
+`results/reannotation/consensus_annotation.gff3.gz` gives a consensus gene set for each of the 17,859 records, and `results/reannotation/gene_proposals.csv.gz` lists, per record, the GenBank CDS flagged for review, the proposed additions and the start corrections. `results/reannotation/records_reannotation.csv.gz` gives each record's class (consistent, minor revision, major revision, unannotated). Flagged and proposed genes are review targets, not proven errors: some flagged genes are genuine, for example NinD and NinE of phage lambda.
 
 ## Repository layout
 
@@ -30,16 +40,18 @@ The full numbers are in [`docs/RESULTS.md`](docs/RESULTS.md), and all figures ar
 | `src/phageannoscope/` | Pipeline package: GenBank import, gene-caller adapters, CDS matching, storage, validation |
 | `scripts/cohort/` | Cohort metadata, host-domain resolution, protocol amendments |
 | `scripts/phrogs/` | Building the PHROGs HMMER3 library; cached protein search |
-| `scripts/pipeline/` | Batch runner, resource guard, checkpoint rebuild, merging of batches, post-processing |
-| `scripts/analysis/` | Hypothesis statistics (GEE, cluster bootstrap), robustness, descriptive statistics, figures, Phold |
+| `scripts/pipeline/` | GenBank download, batch manifests, batch runner, resource guard, checkpoint rebuild, merging of batches, post-processing |
+| `scripts/analysis/` | Primary statistics (GEE, cluster bootstrap), robustness, descriptive statistics, figures, Phold |
+| `scripts/record_age/` | GenBank record metadata, discordance with both callers by record age |
+| `scripts/reannotation/` | Consensus re-annotation rules, summary tables and figure |
 | `scripts/reproducibility/` | Cross-machine check with reference calls |
 | `tests/` | Automated tests (`pytest`) |
 | `configs/` | Prespecified protocol parameters and run configurations |
 | `environment/` | Conda environment files with pinned versions |
 | `docs/` | Protocol and amendments, reproduction guide, results, references |
 | `manifests/` | Validated cohort manifest, accession lists of the nested batches, checksums |
-| `results/` | Final statistics, descriptive tables, robustness analyses, Phold results |
-| `figures/` | Figures 1–11 (PNG, SVG, PDF) |
+| `results/` | Final statistics, descriptive tables, robustness analyses, Phold results, record age, consensus re-annotation |
+| `figures/` | Figures 1–13 (PNG; SVG and PDF where available) |
 
 ## Quick start
 
@@ -58,7 +70,7 @@ The raw GenBank records (~4 GB), caller outputs and per-locus tables (tens of GB
 
 ## Methods in brief
 
-The protocol was registered before analysis; all later changes are dated amendments with rationale in [`docs/PROTOCOL.md`](docs/PROTOCOL.md).
+The protocol was registered before analysis; all later changes are dated amendments with rationale in [`docs/PROTOCOL.md`](docs/PROTOCOL.md). The record-age analysis and the consensus re-annotation were added after the primary analysis and are documented there as exploratory analyses E1 and E2.
 
 - **Tool versions:** PHANOTATE 1.6.7, Pyrodigal-gv 0.3.2 / Pyrodigal 3.7.1, Biopython 1.88, pyhmmer 0.12.3 with PHROGs v4 (rebuilt as HMMER3 profiles), Phold 1.2.6 / Foldseek 10.941cd33.
 - **Reproducibility check:** 17 genomes recomputed from scratch on a second machine gave 7,247/7,247 identical CDS calls.

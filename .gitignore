@@ -10,6 +10,10 @@ results/*/
 !results/descriptive/
 !results/robustness/
 !results/phold/
+!results/record_age/
+!results/reannotation/
 *.parquet
 !scripts/reproducibility/reference_calls.parquet
 *.duckdb
+manifests/batch[1-4].csv
+manifests/reference_genomes_local.csv

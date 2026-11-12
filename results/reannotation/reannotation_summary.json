@@ -1,0 +1,74 @@
+{
+  "genomes": 17859,
+  "gene_categories": {
+    "confirmed": 1748010,
+    "one_caller_other": 299082,
+    "supported": 138632,
+    "two_caller_other": 43466,
+    "add_A": 33700,
+    "add_B": 33423,
+    "gb_only_unsupported": 21353,
+    "gb_only_function": 5427,
+    "one_caller_function": 4110
+  },
+  "start_corrections": 69379,
+  "record_classes": {
+    "minor": 9982,
+    "consistent": 6454,
+    "unannotated": 716,
+    "major": 707
+  },
+  "records_with_add_A": 3931,
+  "records_with_gb_only_unsupported": 9517,
+  "consensus_genes": 2006768,
+  "add_A_by_category": {
+    "DNA, RNA and nucleotide metabolism": 9716,
+    "tail": 7221,
+    "head and packaging": 6045,
+    "other": 3475,
+    "lysis": 2284,
+    "moron, auxiliary metabolic gene and host takeover": 2099,
+    "transcription regulation": 1434,
+    "connector": 1171,
+    "integration and excision": 255
+  },
+  "gb_only_unsupported_length_aa_median": 54.0,
+  "class_by_period": {
+    "2008–2011": {
+      "consistent": 0.1672,
+      "major": 0.173,
+      "minor": 0.6599,
+      "unannotated": 0.0
+    },
+    "2012–2015": {
+      "consistent": 0.2685,
+      "major": 0.0455,
+      "minor": 0.6733,
+      "unannotated": 0.0127
+    },
+    "2016–2019": {
+      "consistent": 0.3266,
+      "major": 0.0253,
+      "minor": 0.6252,
+      "unannotated": 0.0229
+    },
+    "2020–2023": {
+      "consistent": 0.3908,
+      "major": 0.0283,
+      "minor": 0.518,
+      "unannotated": 0.0629
+    },
+    "2024–2026": {
+      "consistent": 0.4773,
+      "major": 0.0294,
+      "minor": 0.454,
+      "unannotated": 0.0392
+    },
+    "≤2007": {
+      "consistent": 0.1974,
+      "major": 0.2513,
+      "minor": 0.4718,
+      "unannotated": 0.0795
+    }
+  }
+}

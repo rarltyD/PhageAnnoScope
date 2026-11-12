@@ -1,0 +1,46 @@
+{
+  "description": "Exact-sequence duplicate groups among primary candidates: are GenBank CDS coordinates identical across records?",
+  "groups": 5547,
+  "alias_records": 5129,
+  "identical_cds_with_refseq_copy": 5137,
+  "identical_cds_genbank_only": 187,
+  "different_cds_with_refseq_copy": 169,
+  "different_cds_genbank_only": 54,
+  "representative_rule": "smallest accession.version among eligible records (usually the original GenBank submission)",
+  "examples_different": [
+    {
+      "records": [
+        "AB897757.1",
+        "NC_027399.1"
+      ],
+      "cds": [
+        64,
+        683
+      ]
+    },
+    {
+      "records": [
+        "AB009866.2",
+        "NC_002321.1"
+      ],
+      "cds": [
+        62,
+        62
+      ],
+      "hypothetical": [
+        0,
+        18
+      ]
+    },
+    {
+      "records": [
+        "AF011378.1",
+        "NC_001835.1"
+      ],
+      "cds": [
+        54,
+        56
+      ]
+    }
+  ]
+}

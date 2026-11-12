@@ -1,11 +1,13 @@
 cff-version: 1.2.0
 message: "If you use this code or its results, please cite it as below."
-title: "PhageAnnoScope: inter-tool disagreement in bacteriophage gene calling and functional uncertainty of phage proteins"
+title: "PhageAnnoScope: inter-tool disagreement in bacteriophage gene calling, quality of GenBank phage records and consensus re-annotation"
 authors:
   - family-names: Kerimov
     given-names: T. T.
     email: kerimov03.t14@gmail.com
-    affiliation: "Scientific and Production Center of Microbiology and Virology LLP"
-date-released: 2026-10-23
+    affiliation: "Research and Production Center for Microbiology and Virology, Almaty, Kazakhstan"
+    orcid: "https://orcid.org/0009-0005-6691-4969"
+version: 1.1.0
+date-released: 2026-11-12
 license: MIT
-keywords: [bacteriophage, genome annotation, gene calling, PHANOTATE, Pyrodigal-gv, PHROGs, Phold]
+keywords: [bacteriophage, genome annotation, gene calling, GenBank, re-annotation, PHANOTATE, Pyrodigal-gv, PHROGs, Phold]

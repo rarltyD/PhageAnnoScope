@@ -43,7 +43,7 @@ A record entered the primary-candidate set (28,664 records) if it met all of the
 3. **Completeness.** The genome is complete or high quality. Segmented genomes form a separate layer, and records flagged as proviral are held.
 4. **Ambiguous bases.** Sequences with N, or (amendment A5) other IUPAC ambiguity codes, enter sensitivity analyses only.
 5. **Genetic code and recoding.** Genomes with a non-standard genetic code or genome-level recoding are held. The narrower treatment of ribosomal slippage is set by amendments A2 and A2c.
-6. **Duplicates.** Exact sequence duplicates are represented by one deterministic accession.
+6. **Duplicates.** Exact sequence duplicates are represented by one deterministic accession: the smallest accession.version among eligible records, which is usually the original GenBank submission rather than its RefSeq copy (`NC_…`). Caller predictions depend only on the sequence, so H1 and H2 do not depend on this choice; comparisons with the GenBank annotation (agreement with GenBank, H4, "hypothetical" shares) do. Check of all 5,547 duplicate groups (`results/descriptive/duplicate_annotation_check.json`): 5,324 (96.0%) had identical CDS coordinates in all records; 223 (4.0%) differed, 169 of them between an original record and its RefSeq re-annotation (e.g. Klebsiella phage K64-1: 64 CDS in AB897757.1 versus 683 CDS in NC_027399.1). Sparsely annotated originals are handled by amendment A6.
 
 ### 3.3 Relatedness
 
@@ -123,6 +123,38 @@ Both changes have tests.
 - The GEE for the full cohort uses a memory-lean IRLS implementation with a cluster sandwich estimator (`scripts/analysis/lowmem_gee.py`). It is identical to statsmodels GEE with independence working correlation and robust SE. Checked on the 4,909-genome batch: OR, 95% CI and p agree to 6 decimals.
 - Cross-machine check: 17 genomes recomputed from scratch on a second machine gave 7,247/7,247 identical CDS calls.
 
+## Exploratory analyses (added 2026-11-10 to 2026-11-12)
+
+Both analyses were added after the primary analysis was complete and are exploratory. Their definitions and thresholds were fixed before their results were examined. They do not change any primary estimate.
+
+**E1. Record age and discordance with both callers.** Unit: genome (17,862; three genomes without a submission date are excluded). Record metadata come from GenBank headers and feature tables retrieved on 2026-11-10: earliest *Direct Submission* date, LOCUS date (last modification), structured-comment *Sequencing Technology* and *Annotation Pipeline*, number of CDS, and the gene caller named in CDS `/inference` or `/note`. The `year` in `results/descriptive/per_genome_summary.csv` and `figures/fig6_agreement_by_record_year` is the LOCUS date, i.e. the last modification, not the submission; E1 uses the submission date.
+
+- *Discordant*: GenBank stop-set Jaccard < 0.8 with both PHANOTATE and Pyrodigal-gv (sensitivity 0.7 and 0.9). Split into *unannotated* (no CDS deposited) and *annotated but discordant*.
+- Logistic GEE over relatedness blocks (independence, cluster-robust SE). Exposure: submission period (≤2007, 2008–2011, 2012–2015, 2016–2019, 2020–2023 reference, 2024–2026). Adjusted for sequencing technology, log10 genome length, GC content and lifestyle. The two components are modelled separately; the annotated-but-discordant model uses annotated genomes only.
+- The gene caller named in a record is summarised descriptively only: Prodigal and PHANOTATE are the comparison callers or their relatives.
+
+**E2. Consensus re-annotation.** GenBank CDS and caller models are matched by genome, strand and stop-codon coordinates; caller support counts only at primary-eligible stop-loci, and CDS excluded from the primary comparison are not assessed.
+
+| Gene category | Rule |
+|---|---|
+| confirmed | GenBank CDS predicted by both callers |
+| supported | GenBank CDS predicted by one caller |
+| GenBank-only with function | predicted by neither caller; specific PHROGs function |
+| GenBank-only unsupported (flagged) | neither caller nor a specific function |
+| proposed addition | both callers, absent from GenBank, specific PHROGs function |
+| reported only | two-caller ORFs ≥ 100 aa absent from GenBank without a specific function |
+| start correction | shared stop; both callers agree on the start; GenBank start differs |
+
+Record classes: *unannotated* (no CDS); *major revision* (flagged + proposed ≥ 10% of the assessed GenBank CDS, or discordant as in E1); *minor revision* (at least one flagged or proposed gene); *consistent*. Sensitivity thresholds 5% and 20%. The consensus GFF3 contains two-caller loci, one-caller loci with a specific function and GenBank-only CDS with a specific function, with the coordinates of the longest model at the stop and the product of the best PHROGs hit.
+
+**Computation for E2 (2026-11-10 to 2026-11-12).** Per-locus tables of the study were not kept, so gene calling and the PHROGs search were regenerated with the same code, versions and configuration. None of these points changes an estimand.
+
+- GenBank records were downloaded again; all 17,882 files were byte-identical to the study files (same SHA-256).
+- Per-genome results of the original batches 2 and 3 were reused (batch 3 rebuilt from its 4,963 verified checkpoints with `rebuild_from_checkpoints.py`); batches 1 and 4 and the remaining 37 genomes of batch 3 were recomputed. Batch 1 was interrupted by a WSL kernel update and rebuilt from its checkpoints in the same way.
+- Before recomputation, the cross-machine check reproduced the reference CDS calls exactly.
+- PHROGs: the original HMM library (SHA-256 `9a210cd6…`) was used. A rebuild from the same alignment archive (SHA-256 verified) gave a different file checksum; all 38,880 profiles were numerically identical, and only the creation time and command line stored in each profile differed. The PHROGs site certificate had expired at the time, so the alignment archive was taken from a Zenodo mirror (record 23342382) and verified against `manifests/phrogs_v4_SHA256SUMS.txt`.
+- The merged data contain the same 1,921,788 GenBank CDS as the study; apart from the three genomes without a submission date, two-caller and one-caller loci match the primary analysis (1,858,599 and 441,824 versus 1,858,746 and 441,875).
+
 ## Limitations
 
 - There is no experimental gold standard, so agreement is measured, not accuracy.
@@ -131,3 +163,5 @@ Both changes have tests.
 - PHROGs and Phold share reference information.
 - H1 cannot distinguish genuine but uncharacterised single-caller ORFs from false predictions.
 - Additional ORFs are hypotheses that require experimental validation.
+- For 4% of duplicate groups the original GenBank record and its RefSeq copy carry different annotations; the original record was analysed.
+- E1 and E2 are exploratory; submission period is correlated with sequencing technology, submitting group and phage group, so residual confounding is likely. Flagged and proposed genes in E2 are review targets, not proven errors.

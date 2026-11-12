@@ -1,0 +1,562 @@
+{
+  "components": {
+    "unannotated": 716,
+    "discordant_annotated": 623
+  },
+  "n_genomes_input": 17862,
+  "n_analysed": 17859,
+  "n_blocks": 4490,
+  "excluded": {
+    "no_genbank_jaccard": 0,
+    "no_submission_date": 3
+  },
+  "threshold_primary": 0.8,
+  "overall_discordant": {
+    "n": 1339,
+    "share": 0.075
+  },
+  "submission_vs_modification_year": {
+    "same_year_share": 0.4734,
+    "median_gap_years": 1.0,
+    "spearman": 0.7693
+  },
+  "by_category": {
+    "seq_tech": {
+      "454": {
+        "genomes": 804,
+        "share": 0.051,
+        "median_sub_year": 2015.0,
+        "ci_low": 0.035,
+        "ci_high": 0.0715
+      },
+      "Hybrid short+long": {
+        "genomes": 279,
+        "share": 0.2832,
+        "median_sub_year": 2021.0,
+        "ci_low": 0.1993,
+        "ci_high": 0.3805
+      },
+      "Illumina/Ion/MGI": {
+        "genomes": 12055,
+        "share": 0.06,
+        "median_sub_year": 2021.0,
+        "ci_low": 0.0506,
+        "ci_high": 0.0697
+      },
+      "Long-read": {
+        "genomes": 419,
+        "share": 0.1098,
+        "median_sub_year": 2023.0,
+        "ci_low": 0.0754,
+        "ci_high": 0.1511
+      },
+      "Not stated": {
+        "genomes": 4100,
+        "share": 0.1027,
+        "median_sub_year": 2017.0,
+        "ci_low": 0.0635,
+        "ci_high": 0.1604
+      },
+      "Other": {
+        "genomes": 70,
+        "share": 0.0429,
+        "median_sub_year": 2022.0,
+        "ci_low": 0.0,
+        "ci_high": 0.1216
+      },
+      "Sanger": {
+        "genomes": 132,
+        "share": 0.197,
+        "median_sub_year": 2019.0,
+        "ci_low": 0.1017,
+        "ci_high": 0.3049
+      }
+    },
+    "caller": {
+      "GeneMark": {
+        "genomes": 61,
+        "share": 0.0,
+        "median_sub_year": 2018.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "Glimmer": {
+        "genomes": 64,
+        "share": 0.0781,
+        "median_sub_year": 2015.0,
+        "ci_low": 0.0133,
+        "ci_high": 0.1642
+      },
+      "Not stated": {
+        "genomes": 15870,
+        "share": 0.0828,
+        "median_sub_year": 2020.0,
+        "ci_low": 0.0684,
+        "ci_high": 0.1009
+      },
+      "Other stated": {
+        "genomes": 72,
+        "share": 0.0833,
+        "median_sub_year": 2021.0,
+        "ci_low": 0.026,
+        "ci_high": 0.1667
+      },
+      "PHANOTATE": {
+        "genomes": 284,
+        "share": 0.0246,
+        "median_sub_year": 2023.0,
+        "ci_low": 0.0031,
+        "ci_high": 0.0608
+      },
+      "Prodigal": {
+        "genomes": 1453,
+        "share": 0.0048,
+        "median_sub_year": 2022.0,
+        "ci_low": 0.0016,
+        "ci_high": 0.0084
+      },
+      "RAST": {
+        "genomes": 55,
+        "share": 0.0,
+        "median_sub_year": 2019.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      }
+    },
+    "lifestyle": {
+      "lytic": {
+        "genomes": 12484,
+        "share": 0.0754,
+        "median_sub_year": 2021.0,
+        "ci_low": 0.0649,
+        "ci_high": 0.0864
+      },
+      "temperate": {
+        "genomes": 5178,
+        "share": 0.0481,
+        "median_sub_year": 2019.0,
+        "ci_low": 0.0387,
+        "ci_high": 0.0601
+      },
+      "unknown": {
+        "genomes": 197,
+        "share": 0.7563,
+        "median_sub_year": 2010.0,
+        "ci_low": 0.2794,
+        "ci_high": 0.9024
+      }
+    }
+  },
+  "gee": {
+    "M1_period": {
+      "formula": "discordant ~ C(period, Treatment('2020–2023'))",
+      "n_obs": 17859,
+      "n_clusters": 4490,
+      "n_events": 1339
+    },
+    "M2_period_adjusted": {
+      "formula": "discordant ~ C(period, Treatment('2020–2023')) + C(seq_tech, Treatment('Illumina/Ion/MGI')) + log10_kb + gc_c + C(lifestyle)",
+      "n_obs": 17859,
+      "n_clusters": 4490,
+      "n_events": 1339
+    },
+    "M3_plus_caller": {
+      "formula": "discordant ~ C(period, Treatment('2020–2023')) + C(seq_tech, Treatment('Illumina/Ion/MGI')) + log10_kb + gc_c + C(lifestyle) + C(caller, Treatment('Not stated'))",
+      "n_obs": 17859,
+      "n_clusters": 4490,
+      "n_events": 1339
+    },
+    "U_unannotated_adjusted": {
+      "formula": "unannotated ~ C(period, Treatment('2020–2023')) + C(seq_tech, Treatment('Illumina/Ion/MGI')) + log10_kb + gc_c + C(lifestyle)",
+      "n_obs": 17859,
+      "n_clusters": 4490,
+      "n_events": 716
+    },
+    "D_discordant_annotated_adjusted": {
+      "formula": "disc_annotated ~ C(period, Treatment('2020–2023')) + C(seq_tech, Treatment('Illumina/Ion/MGI')) + log10_kb + gc_c + C(lifestyle)",
+      "n_obs": 17143,
+      "n_clusters": 4357,
+      "n_events": 623
+    },
+    "S70_period_adjusted": {
+      "formula": "disc_70 ~ C(period, Treatment('2020–2023')) + C(seq_tech, Treatment('Illumina/Ion/MGI')) + log10_kb + gc_c + C(lifestyle)",
+      "n_obs": 17859,
+      "n_clusters": 4490,
+      "n_events": 1088
+    },
+    "S90_period_adjusted": {
+      "formula": "disc_90 ~ C(period, Treatment('2020–2023')) + C(seq_tech, Treatment('Illumina/Ion/MGI')) + log10_kb + gc_c + C(lifestyle)",
+      "n_obs": 17859,
+      "n_clusters": 4490,
+      "n_events": 4284
+    },
+    "S_trend_per_5y_adjusted": {
+      "formula": "discordant ~ I((sub_year - 2020) / 5) + C(seq_tech, Treatment('Illumina/Ion/MGI')) + log10_kb + gc_c + C(lifestyle)",
+      "n_obs": 17859,
+      "n_clusters": 4490,
+      "n_events": 1339
+    }
+  },
+  "gee_period_or": {
+    "M1_period": {
+      "2008–2011": {
+        "OR": 2.0475,
+        "ci_low": 0.6652,
+        "ci_high": 6.3023,
+        "p": 0.2116
+      },
+      "2012–2015": {
+        "OR": 0.5719,
+        "ci_low": 0.4097,
+        "ci_high": 0.7984,
+        "p": 0.001
+      },
+      "2016–2019": {
+        "OR": 0.5123,
+        "ci_low": 0.3788,
+        "ci_high": 0.693,
+        "p": 0.0
+      },
+      "2024–2026": {
+        "OR": 0.7355,
+        "ci_low": 0.5432,
+        "ci_high": 0.9959,
+        "p": 0.047
+      },
+      "≤2007": {
+        "OR": 4.2956,
+        "ci_low": 1.73,
+        "ci_high": 10.6663,
+        "p": 0.0017
+      }
+    },
+    "M2_period_adjusted": {
+      "2008–2011": {
+        "OR": 1.4913,
+        "ci_low": 0.8075,
+        "ci_high": 2.7541,
+        "p": 0.2016
+      },
+      "2012–2015": {
+        "OR": 0.6207,
+        "ci_low": 0.3985,
+        "ci_high": 0.9669,
+        "p": 0.035
+      },
+      "2016–2019": {
+        "OR": 0.5872,
+        "ci_low": 0.4165,
+        "ci_high": 0.8281,
+        "p": 0.0024
+      },
+      "2024–2026": {
+        "OR": 0.7063,
+        "ci_low": 0.5232,
+        "ci_high": 0.9534,
+        "p": 0.0231
+      },
+      "≤2007": {
+        "OR": 2.5543,
+        "ci_low": 1.3826,
+        "ci_high": 4.7191,
+        "p": 0.0027
+      }
+    },
+    "M3_plus_caller": {
+      "2008–2011": {
+        "OR": 1.1915,
+        "ci_low": 0.6268,
+        "ci_high": 2.2648,
+        "p": 0.5929
+      },
+      "2012–2015": {
+        "OR": 0.5207,
+        "ci_low": 0.3269,
+        "ci_high": 0.8294,
+        "p": 0.006
+      },
+      "2016–2019": {
+        "OR": 0.5112,
+        "ci_low": 0.3548,
+        "ci_high": 0.7365,
+        "p": 0.0003
+      },
+      "2024–2026": {
+        "OR": 0.6922,
+        "ci_low": 0.5068,
+        "ci_high": 0.9453,
+        "p": 0.0207
+      },
+      "≤2007": {
+        "OR": 2.034,
+        "ci_low": 1.0672,
+        "ci_high": 3.8766,
+        "p": 0.031
+      }
+    },
+    "U_unannotated_adjusted": {
+      "2008–2011": {
+        "OR": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "p": 0.0
+      },
+      "2012–2015": {
+        "OR": 0.2632,
+        "ci_low": 0.1289,
+        "ci_high": 0.5374,
+        "p": 0.0002
+      },
+      "2016–2019": {
+        "OR": 0.4303,
+        "ci_low": 0.2494,
+        "ci_high": 0.7425,
+        "p": 0.0024
+      },
+      "2024–2026": {
+        "OR": 0.5944,
+        "ci_low": 0.3924,
+        "ci_high": 0.9004,
+        "p": 0.0141
+      },
+      "≤2007": {
+        "OR": 1.1134,
+        "ci_low": 0.4004,
+        "ci_high": 3.0957,
+        "p": 0.8369
+      }
+    },
+    "D_discordant_annotated_adjusted": {
+      "2008–2011": {
+        "OR": 4.2288,
+        "ci_low": 2.5173,
+        "ci_high": 7.104,
+        "p": 0.0
+      },
+      "2012–2015": {
+        "OR": 1.4117,
+        "ci_low": 0.9599,
+        "ci_high": 2.0763,
+        "p": 0.0798
+      },
+      "2016–2019": {
+        "OR": 1.0026,
+        "ci_low": 0.7245,
+        "ci_high": 1.3875,
+        "p": 0.9874
+      },
+      "2024–2026": {
+        "OR": 1.0259,
+        "ci_low": 0.7326,
+        "ci_high": 1.4366,
+        "p": 0.8818
+      },
+      "≤2007": {
+        "OR": 5.6377,
+        "ci_low": 3.4591,
+        "ci_high": 9.1883,
+        "p": 0.0
+      }
+    },
+    "S70_period_adjusted": {
+      "2008–2011": {
+        "OR": 1.0193,
+        "ci_low": 0.4447,
+        "ci_high": 2.3362,
+        "p": 0.964
+      },
+      "2012–2015": {
+        "OR": 0.4238,
+        "ci_low": 0.2445,
+        "ci_high": 0.7344,
+        "p": 0.0022
+      },
+      "2016–2019": {
+        "OR": 0.5077,
+        "ci_low": 0.3369,
+        "ci_high": 0.7652,
+        "p": 0.0012
+      },
+      "2024–2026": {
+        "OR": 0.6772,
+        "ci_low": 0.4829,
+        "ci_high": 0.9498,
+        "p": 0.0239
+      },
+      "≤2007": {
+        "OR": 1.906,
+        "ci_low": 0.9229,
+        "ci_high": 3.9363,
+        "p": 0.0813
+      }
+    },
+    "S90_period_adjusted": {
+      "2008–2011": {
+        "OR": 1.9853,
+        "ci_low": 1.4869,
+        "ci_high": 2.6509,
+        "p": 0.0
+      },
+      "2012–2015": {
+        "OR": 1.8919,
+        "ci_low": 1.3736,
+        "ci_high": 2.6059,
+        "p": 0.0001
+      },
+      "2016–2019": {
+        "OR": 1.242,
+        "ci_low": 1.0303,
+        "ci_high": 1.4971,
+        "p": 0.023
+      },
+      "2024–2026": {
+        "OR": 0.7875,
+        "ci_low": 0.6557,
+        "ci_high": 0.9459,
+        "p": 0.0106
+      },
+      "≤2007": {
+        "OR": 3.1405,
+        "ci_low": 2.2499,
+        "ci_high": 4.3836,
+        "p": 0.0
+      }
+    }
+  },
+  "gee_trend_per_5y": {
+    "OR": 0.8856,
+    "ci_low": 0.7558,
+    "ci_high": 1.0376,
+    "p": 0.1328
+  },
+  "direction": {
+    "0": {
+      "count": 16520.0,
+      "25%": -0.297,
+      "50%": -0.208,
+      "75%": -0.126
+    },
+    "1": {
+      "count": 1339.0,
+      "25%": -1.684,
+      "50%": -1.341,
+      "75%": -0.556
+    }
+  },
+  "by_submission_period": {
+    "≤2007": {
+      "genomes": 390,
+      "discordant": 113,
+      "share": 0.2897,
+      "unannotated": 0.0795,
+      "disc_annotated": 0.2103,
+      "median_gb_best": 0.8736,
+      "median_gb_cds_per_kb": 1.4612,
+      "share_disc_70": 0.2308,
+      "share_disc_90": 0.5821,
+      "median_caller_loci_per_kb": 1.6544,
+      "disc_among_annotated": 0.2284,
+      "ci_low": 0.1388,
+      "ci_high": 0.4673,
+      "unannotated_ci_low": 0.011,
+      "unannotated_ci_high": 0.1746,
+      "disc_annotated_ci_low": 0.1178,
+      "disc_annotated_ci_high": 0.298
+    },
+    "2008–2011": {
+      "genomes": 688,
+      "discordant": 112,
+      "share": 0.1628,
+      "unannotated": 0.0,
+      "disc_annotated": 0.1628,
+      "median_gb_best": 0.9127,
+      "median_gb_cds_per_kb": 1.5007,
+      "share_disc_70": 0.1177,
+      "share_disc_90": 0.4113,
+      "median_caller_loci_per_kb": 1.6933,
+      "disc_among_annotated": 0.1628,
+      "ci_low": 0.0595,
+      "ci_high": 0.3142,
+      "unannotated_ci_low": 0.0,
+      "unannotated_ci_high": 0.0,
+      "disc_annotated_ci_low": 0.0595,
+      "disc_annotated_ci_high": 0.3142
+    },
+    "2012–2015": {
+      "genomes": 1650,
+      "discordant": 85,
+      "share": 0.0515,
+      "unannotated": 0.0127,
+      "disc_annotated": 0.0388,
+      "median_gb_best": 0.9167,
+      "median_gb_cds_per_kb": 1.4935,
+      "share_disc_70": 0.0285,
+      "share_disc_90": 0.3461,
+      "median_caller_loci_per_kb": 1.7628,
+      "disc_among_annotated": 0.0393,
+      "ci_low": 0.0399,
+      "ci_high": 0.065,
+      "unannotated_ci_low": 0.0068,
+      "unannotated_ci_high": 0.0201,
+      "disc_annotated_ci_low": 0.0286,
+      "disc_annotated_ci_high": 0.0498
+    },
+    "2016–2019": {
+      "genomes": 5453,
+      "discordant": 253,
+      "share": 0.0464,
+      "unannotated": 0.0229,
+      "disc_annotated": 0.0235,
+      "median_gb_best": 0.9314,
+      "median_gb_cds_per_kb": 1.5077,
+      "share_disc_70": 0.0345,
+      "share_disc_90": 0.2445,
+      "median_caller_loci_per_kb": 1.7614,
+      "disc_among_annotated": 0.024,
+      "ci_low": 0.0357,
+      "ci_high": 0.0582,
+      "unannotated_ci_low": 0.0146,
+      "unannotated_ci_high": 0.0328,
+      "disc_annotated_ci_low": 0.0174,
+      "disc_annotated_ci_high": 0.0303
+    },
+    "2020–2023": {
+      "genomes": 6722,
+      "discordant": 583,
+      "share": 0.0867,
+      "unannotated": 0.0629,
+      "disc_annotated": 0.0238,
+      "median_gb_best": 0.9478,
+      "median_gb_cds_per_kb": 1.4789,
+      "share_disc_70": 0.0771,
+      "share_disc_90": 0.2048,
+      "median_caller_loci_per_kb": 1.7114,
+      "disc_among_annotated": 0.0254,
+      "ci_low": 0.0714,
+      "ci_high": 0.1041,
+      "unannotated_ci_low": 0.048,
+      "unannotated_ci_high": 0.0796,
+      "disc_annotated_ci_low": 0.0194,
+      "disc_annotated_ci_high": 0.0286
+    },
+    "2024–2026": {
+      "genomes": 2956,
+      "discordant": 193,
+      "share": 0.0653,
+      "unannotated": 0.0392,
+      "disc_annotated": 0.026,
+      "median_gb_best": 0.9623,
+      "median_gb_cds_per_kb": 1.5016,
+      "share_disc_70": 0.0555,
+      "share_disc_90": 0.1668,
+      "median_caller_loci_per_kb": 1.6816,
+      "disc_among_annotated": 0.0271,
+      "ci_low": 0.0522,
+      "ci_high": 0.0792,
+      "unannotated_ci_low": 0.0285,
+      "unannotated_ci_high": 0.0515,
+      "disc_annotated_ci_low": 0.0184,
+      "disc_annotated_ci_high": 0.0344
+    }
+  }
+}

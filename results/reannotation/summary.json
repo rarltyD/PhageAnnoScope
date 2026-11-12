@@ -1,0 +1,143 @@
+{
+  "table4": {
+    "gb_confirmed": 1748010,
+    "gb_supported_one_caller": 138632,
+    "gb_only_function": 5427,
+    "gb_only_unsupported": 21353,
+    "gb_only_unsupported_records": 9517,
+    "add_A_annotated": 6983,
+    "add_A_annotated_records": 3215,
+    "add_A_unannotated": 26717,
+    "add_B": 33423,
+    "start_corrections": 69379,
+    "start_correction_records": 12685,
+    "consensus_genes": 2006768
+  },
+  "gb_only_unsupported_length": {
+    "count": 21353.0,
+    "mean": 84.2,
+    "std": 152.0,
+    "min": 4.0,
+    "25%": 39.0,
+    "50%": 54.0,
+    "75%": 82.0,
+    "max": 4493.0
+  },
+  "gb_only_unsupported_lt50_share": 0.4335,
+  "flagged_per_annotated_record": {
+    "count": 17143.0,
+    "mean": 1.65,
+    "std": 3.93,
+    "min": 0.0,
+    "50%": 1.0,
+    "75%": 2.0,
+    "90%": 4.0,
+    "99%": 11.0,
+    "max": 170.0
+  },
+  "minor_with_one_flagged_gene": 4327,
+  "major_from_part_a": 623,
+  "record_classes": {
+    "consistent": 6454,
+    "minor": 9982,
+    "major": 707,
+    "unannotated": 716
+  },
+  "class_by_period_n": {
+    "≤2007": {
+      "consistent": 77,
+      "minor": 184,
+      "major": 98,
+      "unannotated": 31
+    },
+    "2008–2011": {
+      "consistent": 115,
+      "minor": 454,
+      "major": 119,
+      "unannotated": 0
+    },
+    "2012–2015": {
+      "consistent": 443,
+      "minor": 1111,
+      "major": 75,
+      "unannotated": 21
+    },
+    "2016–2019": {
+      "consistent": 1781,
+      "minor": 3409,
+      "major": 138,
+      "unannotated": 125
+    },
+    "2020–2023": {
+      "consistent": 2627,
+      "minor": 3482,
+      "major": 190,
+      "unannotated": 423
+    },
+    "2024–2026": {
+      "consistent": 1411,
+      "minor": 1342,
+      "major": 87,
+      "unannotated": 116
+    }
+  },
+  "class_by_caller_share": {
+    "GeneMark": {
+      "consistent": 0.4918,
+      "major": 0.0164,
+      "minor": 0.4918,
+      "unannotated": 0.0
+    },
+    "Glimmer": {
+      "consistent": 0.1719,
+      "major": 0.0781,
+      "minor": 0.75,
+      "unannotated": 0.0
+    },
+    "Not stated": {
+      "consistent": 0.3425,
+      "major": 0.043,
+      "minor": 0.5697,
+      "unannotated": 0.0449
+    },
+    "Other stated": {
+      "consistent": 0.3194,
+      "major": 0.0417,
+      "minor": 0.5833,
+      "unannotated": 0.0556
+    },
+    "PHANOTATE": {
+      "consistent": 0.6585,
+      "major": 0.0282,
+      "minor": 0.3134,
+      "unannotated": 0.0
+    },
+    "Prodigal": {
+      "consistent": 0.5148,
+      "major": 0.0055,
+      "minor": 0.4797,
+      "unannotated": 0.0
+    },
+    "RAST": {
+      "consistent": 0.3636,
+      "major": 0.0,
+      "minor": 0.6364,
+      "unannotated": 0.0
+    }
+  },
+  "major_threshold_sensitivity": {
+    "0.05": {
+      "major": 1266,
+      "minor": 9423
+    },
+    "0.1": {
+      "major": 707,
+      "minor": 9982
+    },
+    "0.2": {
+      "major": 627,
+      "minor": 10062
+    }
+  },
+  "genbank_all_length_median_sample": 128.0
+}
