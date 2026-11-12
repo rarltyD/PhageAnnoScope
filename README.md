@@ -1,5 +1,7 @@
 # PhageAnnoScope
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24163937.svg)](https://doi.org/10.5281/zenodo.24163937)
+
 **Inter-tool disagreement in bacteriophage gene calling, quality of GenBank phage records and consensus re-annotation**
 
 PhageAnnoScope is a reproducible comparison of the structural and functional annotation of 17,882 complete or high-quality genomes of DNA phages that infect bacteria (INPHARED2 / NCBI GenBank). CDS predicted by PHANOTATE and Pyrodigal-gv are compared with GenBank by exact coordinates and shared stop codons. Proteins are annotated with PHROGs v4 HMMs, and a probability sample is also annotated with Phold. The statistics use cluster-robust GEE, which accounts for relatedness between phages. Two exploratory analyses extend the study: which GenBank records disagree with both callers and how this depends on record age, and a consensus re-annotation of all records.
@@ -77,7 +79,7 @@ The protocol was registered before analysis; all later changes are dated amendme
 
 ## Citation
 
-See [`CITATION.cff`](CITATION.cff).
+See [`CITATION.cff`](CITATION.cff). Archived releases: https://doi.org/10.5281/zenodo.24163937 (all versions); version 1.1.0: https://doi.org/10.5281/zenodo.24163938.
 
 ## Contact
 
