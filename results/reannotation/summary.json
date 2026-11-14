@@ -11,7 +11,20 @@
     "add_B": 33423,
     "start_corrections": 69379,
     "start_correction_records": 12685,
-    "consensus_genes": 2006768
+    "consensus_genes": 2006768,
+    "functional_relabels": 176126,
+    "functional_relabel_records": 14908
+  },
+  "functional_relabel_by_category": {
+    "DNA, RNA and nucleotide metabolism": 44328,
+    "tail": 33941,
+    "head and packaging": 33061,
+    "other": 19148,
+    "moron, auxiliary metabolic gene and host takeover": 14419,
+    "connector": 11096,
+    "lysis": 9924,
+    "transcription regulation": 7510,
+    "integration and excision": 2699
   },
   "gb_only_unsupported_length": {
     "count": 21353.0,
@@ -139,5 +152,5 @@
       "minor": 10062
     }
   },
-  "genbank_all_length_median_sample": 128.0
+  "genbank_all_length_median_sample": 129.0
 }

@@ -144,6 +144,9 @@ Both analyses were added after the primary analysis was complete and are explora
 | proposed addition | both callers, absent from GenBank, specific PHROGs function |
 | reported only | two-caller ORFs ≥ 100 aa absent from GenBank without a specific function |
 | start correction | shared stop; both callers agree on the start; GenBank start differs |
+| functional name (added 2026-11-14) | assessable GenBank CDS with a hypothetical-like product (same rule as the primary analysis) whose protein has a specific PHROGs function |
+
+The functional-name category was added on 2026-11-14, after the record classes below had been defined; it does not change gene categories or record classes.
 
 Record classes: *unannotated* (no CDS); *major revision* (flagged + proposed ≥ 10% of the assessed GenBank CDS, or discordant as in E1); *minor revision* (at least one flagged or proposed gene); *consistent*. Sensitivity thresholds 5% and 20%. The consensus GFF3 contains two-caller loci, one-caller loci with a specific function and GenBank-only CDS with a specific function, with the coordinates of the longest model at the stop and the product of the best PHROGs hit.
 

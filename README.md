@@ -19,7 +19,7 @@ Full cohort: 17,862 genomes in the primary analysis, 2,300,621 stop-loci, 4,490 
 | ORFs absent from GenBank | 6,399 ORFs in 3,986 fully annotated genomes match characterised PHROGs, mostly DNA metabolism and lysis |
 | GenBank "hypothetical" proteins | 65.9% of GenBank CDS; 13.9% of them have a specific PHROGs function |
 | Records discordant with both callers | 7.5% of genomes: 716 deposited without any CDS (peak 2020–2023, hybrid assemblies OR 7.3) and 623 annotated but discordant (submitted ≤2007 OR 5.6, 2008–2011 OR 4.2 versus 2020–2023) |
-| Consensus re-annotation | 21,353 GenBank CDS without caller or PHROGs support flagged; 6,983 functionally annotated genes proposed for 3,215 annotated records; 707 records (4.0%) need major revision |
+| Consensus re-annotation | 21,353 GenBank CDS without caller or PHROGs support flagged; functional names proposed for 176,126 CDS annotated as hypothetical; 6,983 functionally annotated genes proposed for 3,215 annotated records; 707 records (4.0%) need major revision |
 
 ![No specific PHROGs function by caller support and protein length](figures/fig4_h1_function_by_support.png)
 
@@ -33,7 +33,7 @@ The full numbers are in [`docs/RESULTS.md`](docs/RESULTS.md) and [`docs/RESULTS_
 
 ## Consensus annotation
 
-`results/reannotation/consensus_annotation.gff3.gz` gives a consensus gene set for each of the 17,859 records, and `results/reannotation/gene_proposals.csv.gz` lists, per record, the GenBank CDS flagged for review, the proposed additions and the start corrections. `results/reannotation/records_reannotation.csv.gz` gives each record's class (consistent, minor revision, major revision, unannotated). Flagged and proposed genes are review targets, not proven errors: some flagged genes are genuine, for example NinD and NinE of phage lambda.
+`results/reannotation/consensus_annotation.gff3.gz` gives a consensus gene set for each of the 17,859 records, and `results/reannotation/gene_proposals.csv.gz` lists, per record, the GenBank CDS flagged for review, the proposed additions, the start corrections and the functional names proposed for hypothetical proteins. The same rules can be applied to genomes outside the cohort (see `docs/REPRODUCE.md`, step 9). `results/reannotation/records_reannotation.csv.gz` gives each record's class (consistent, minor revision, major revision, unannotated). Flagged and proposed genes are review targets, not proven errors: some flagged genes are genuine, for example NinD and NinE of phage lambda.
 
 ## Repository layout
 

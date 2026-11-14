@@ -12,38 +12,69 @@ Gene level
   add_A              both callers, absent from GenBank, specific PHROGs function     -> add
   add_B              both callers, absent from GenBank, no specific function, >=100 aa (reported only)
   start_correction   shared stop, callers agree on one start, GenBank start differs  (reported only)
+  functional_relabel GenBank CDS with a hypothetical-like product whose protein has a specific
+                     PHROGs function (same product rule as the primary analysis; added 2026-11-14,
+                     does not change gene categories or record classes)
 Record level
   unannotated        no CDS in the GenBank record
   major              (gb_only_unsupported + add_A) >= 10% of GenBank CDS, or discordant with both callers
-                     (record-age analysis)
+                     (stop-set Jaccard < 0.8 with each caller)
   minor              at least one gb_only_unsupported or add_A gene
   consistent         none
 Outputs: per-record table, per-gene proposals, consensus GFF3 for all records, summary JSON.
 Exploratory analysis added after the primary analysis (see docs/PROTOCOL.md).
 
-    python scripts/reannotation/reannotate.py results/full_cohort results/record_age/genome_table.csv.gz \
-        results/reannotation
+    python scripts/reannotation/reannotate.py results/full_cohort results/reannotation \
+        --genome-table results/record_age/genome_table.csv.gz
+
+Without --genome-table, the per-genome discordance flags are computed from the run itself.  For runs
+outside the primary cohort (phageannoscope run --diagnostic), use --locus-eligibility geometry: the
+cohort flag of such loci is false by design, while their geometric eligibility is kept.
 """
+import argparse
 import gzip
 import json
-import sys
 from pathlib import Path
 
 import duckdb
 import pandas as pd
 
-run, part_a, out = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
+# Hypothetical-like GenBank products (same rule as scripts/analysis/extra_stats.py).
+HYPO_SQL = r"hypothetical|uncharacteri[sz]ed|unknown|putative protein$|^protein$|duf[0-9]+"
+
+p = argparse.ArgumentParser()
+p.add_argument("run")
+p.add_argument("out")
+p.add_argument("--genome-table", help="genome_table.csv.gz of the record-age analysis")
+p.add_argument("--locus-eligibility", choices=("primary", "geometry"), default="primary")
+a = p.parse_args()
+run, out = Path(a.run), Path(a.out)
 out.mkdir(parents=True, exist_ok=True)
 pq = lambda t: (run / "parquet" / t / "*.parquet").as_posix()
 fn_path = (run / "phrogs" / "protein_function_primary.parquet").as_posix()
 con = duckdb.connect()
 con.execute("SET memory_limit='4GB'; SET threads=3; SET preserve_insertion_order=false")
 
-genomes_a = pd.read_csv(part_a, usecols=["accession_version", "submitted", "period", "unannotated",
-                                          "disc_annotated", "block", "caller", "seq_tech"])
+if a.genome_table:
+    genomes_a = pd.read_csv(a.genome_table, usecols=["accession_version", "submitted", "period",
+                                                     "unannotated", "disc_annotated", "block",
+                                                     "caller", "seq_tech"])
+else:
+    genomes_a = con.execute(f"""
+        WITH g AS (SELECT DISTINCT genome_id, accession_version FROM read_parquet('{pq("genomes")}', union_by_name=true)),
+        gb AS (SELECT genome_id, count(*) FILTER (WHERE source = 'genbank') AS n
+               FROM read_parquet('{pq("cds_calls")}', union_by_name=true) GROUP BY genome_id),
+        j AS (SELECT genome_id, max(stop_jaccard) AS best FROM read_parquet('{pq("genome_metrics")}', union_by_name=true)
+              WHERE metric_scope = 'source_pair' AND 'genbank' IN (source_a, source_b) GROUP BY genome_id)
+        SELECT g.accession_version, NULL AS submitted, NULL AS period,
+               (coalesce(gb.n, 0) = 0)::INT AS unannotated,
+               (coalesce(gb.n, 0) > 0 AND coalesce(j.best, 0) < 0.8)::INT AS disc_annotated,
+               NULL AS block, NULL AS caller, NULL AS seq_tech
+        FROM g LEFT JOIN gb USING (genome_id) LEFT JOIN j USING (genome_id)""").df()
 con.register("cohort", genomes_a)
+locus_flag = "eligible_primary" if a.locus_eligibility == "primary" else "geometry_eligible_primary"
 
-# One row per primary-eligible CDS call with its stop key, start and protein function.
+# One row per primary-eligible CDS call with its stop key, start, protein function and GenBank product.
 con.execute(f"""
 CREATE TEMP TABLE calls AS
 SELECT c.genome_id, c.accession_version, c.source, c.call_id, c.strand,
@@ -51,6 +82,7 @@ SELECT c.genome_id, c.accession_version, c.source, c.call_id, c.strand,
        list_min(list_transform(c.segments, s -> s.start0)) AS lo,
        list_max(list_transform(c.segments, s -> s.end0)) AS hi,
        c.feature_nt_length // 3 - 1 AS length_aa, c.protein_sha256,
+       CASE WHEN c.source = 'genbank' THEN json_extract_string(c.qualifiers_json, '$.product[0]') END AS product,
        f.function_status, f.best_phrog, f.best_category, f.best_annot, f.best_evalue
 FROM read_parquet('{pq("cds_calls")}', union_by_name=true) c
 JOIN cohort USING (accession_version)
@@ -72,26 +104,28 @@ SELECT genome_id, any_value(accession_version) AS accession_version, strand, sto
        min(start_coord) FILTER (WHERE source = 'pyrodigal_gv') AS start_pyr,
        max(length_aa) AS length_aa,
        min(lo) AS lo, max(hi) AS hi,
+       any_value(product) FILTER (WHERE source = 'genbank') AS gb_product,
        bool_or(function_status = 'specific_function') FILTER (WHERE source = 'genbank') AS gb_specific,
        bool_or(function_status = 'specific_function') FILTER (WHERE source <> 'genbank') AS caller_specific,
+       arg_min(best_annot, best_evalue) FILTER (WHERE source = 'genbank' AND function_status = 'specific_function') AS gb_annot,
        arg_min(best_annot, best_evalue) FILTER (WHERE function_status = 'specific_function') AS annot,
        arg_min(best_category, best_evalue) FILTER (WHERE function_status = 'specific_function') AS category,
        arg_min(best_phrog, best_evalue) FILTER (WHERE function_status = 'specific_function') AS phrog
 FROM calls2
 GROUP BY genome_id, strand, stop_key
 """)
-# Caller support counts only at primary-eligible stop-loci (the study's unit), so caller totals
-# match the H1-H4 analysis exactly.
+# Caller support counts only at eligible stop-loci (the study's unit), so caller totals match the
+# primary analysis exactly.
 con.execute(f"""
 CREATE TEMP TABLE keys_el AS
 SELECT k.* REPLACE (k.pha AND el.genome_id IS NOT NULL AS pha, k.pyr AND el.genome_id IS NOT NULL AS pyr)
 FROM keys k
 LEFT JOIN (SELECT DISTINCT genome_id, strand, stop_triplet::VARCHAR AS stop_key
-           FROM read_parquet('{pq("stop_loci")}', union_by_name=true) WHERE eligible_primary) el
+           FROM read_parquet('{pq("stop_loci")}', union_by_name=true) WHERE {locus_flag}) el
   USING (genome_id, strand, stop_key)
 """)
 con.execute("DELETE FROM keys_el WHERE NOT gb AND NOT pha AND NOT pyr")
-con.execute("""
+con.execute(f"""
 CREATE TEMP TABLE genes AS
 SELECT *, (pha::INT + pyr::INT) AS n_callers,
   CASE
@@ -105,7 +139,9 @@ SELECT *, (pha::INT + pyr::INT) AS n_callers,
     WHEN coalesce(caller_specific, false) THEN 'one_caller_function'
     ELSE 'one_caller_other'
   END AS category_rule,
-  (gb AND pha AND pyr AND start_pha = start_pyr AND start_gb <> start_pha) AS start_correction
+  (gb AND pha AND pyr AND start_pha = start_pyr AND start_gb <> start_pha) AS start_correction,
+  (gb AND coalesce(gb_specific, false)
+      AND regexp_matches(lower(coalesce(gb_product, '')), '{HYPO_SQL}')) AS functional_relabel
 FROM keys_el
 """)
 
@@ -118,8 +154,9 @@ for c in ("confirmed", "supported", "gb_only_function", "gb_only_unsupported", "
         counts[c] = 0
 rec = genomes_a.set_index("accession_version").join(counts, how="left").fillna(
     {c: 0 for c in counts.columns})
-rec["start_corrections"] = genes[genes.start_correction == True].groupby("accession_version").size()
-rec["start_corrections"] = rec.start_corrections.fillna(0).astype(int)
+for flag, col in (("start_correction", "start_corrections"), ("functional_relabel", "functional_relabels")):
+    rec[col] = genes[genes[flag] == True].groupby("accession_version").size()
+    rec[col] = rec[col].fillna(0).astype(int)
 rec["gb_cds_assessed"] = rec[["confirmed", "supported", "gb_only_function", "gb_only_unsupported"]].sum(axis=1)
 rec["flagged"] = rec.gb_only_unsupported + rec.add_A
 rec["flagged_share"] = rec.flagged / rec.gb_cds_assessed.where(rec.gb_cds_assessed > 0)
@@ -140,11 +177,11 @@ rec.reset_index().to_csv(out / "records_reannotation.csv.gz", index=False)
 
 # Per-gene proposals (everything except plain confirmed/supported genes and one-caller noise).
 prop = genes[genes.category_rule.isin(["gb_only_unsupported", "gb_only_function", "add_A", "add_B"])
-             | (genes.start_correction == True)].copy()
+             | (genes.start_correction == True) | (genes.functional_relabel == True)].copy()
 prop["start1"] = prop.lo + 1
 prop["end1"] = prop.hi
-prop[["accession_version", "category_rule", "start_correction", "strand", "start1", "end1",
-      "length_aa", "start_gb", "start_pha", "start_pyr", "phrog", "category", "annot"]] \
+prop[["accession_version", "category_rule", "start_correction", "functional_relabel", "strand", "start1",
+      "end1", "length_aa", "start_gb", "start_pha", "start_pyr", "gb_product", "phrog", "category", "annot"]] \
     .sort_values(["accession_version", "start1"]).to_csv(out / "gene_proposals.csv.gz", index=False)
 
 # Consensus GFF3: two-caller genes, one-caller genes with a specific function, GenBank-only genes
@@ -163,22 +200,30 @@ with gzip.open(out / "consensus_annotation.gff3.gz", "wt") as g:
                  f"product={product.replace(';', ',')};evidence={ev}")
         if isinstance(r.phrog, str):
             attrs += f";phrog={r.phrog};phrog_category={str(r.category).replace(';', ',')}"
+        if isinstance(r.gb_product, str):
+            attrs += f";genbank_product={r.gb_product.replace(';', ',')}"
         g.write(f"{r.accession_version}\tPhageAnnoScope\tCDS\t{r.lo + 1}\t{r.hi}\t.\t"
                 f"{'+' if r.strand == 1 else '-'}\t0\t{attrs}\n")
 
+relabel = genes[genes.functional_relabel == True]
 summ = {
     "genomes": int(len(rec)),
     "gene_categories": genes.category_rule.value_counts().to_dict(),
     "start_corrections": int((genes.start_correction == True).sum()),
+    "functional_relabels": int(len(relabel)),
+    "functional_relabel_records": int(relabel.accession_version.nunique()),
+    "functional_relabel_by_category": relabel.category.value_counts().head(12).to_dict(),
     "record_classes": rec.reannotation_class.value_counts().to_dict(),
     "records_with_add_A": int((rec.add_A > 0).sum()),
     "records_with_gb_only_unsupported": int((rec.gb_only_unsupported > 0).sum()),
     "consensus_genes": int(len(keep)),
     "add_A_by_category": genes[genes.category_rule == "add_A"].category.value_counts().head(12).to_dict(),
     "gb_only_unsupported_length_aa_median": float(genes[genes.category_rule == "gb_only_unsupported"].length_aa.median()),
-    "class_by_period": pd.crosstab(rec.period, rec.reannotation_class, normalize="index").round(4).to_dict(orient="index"),
+    "class_by_period": pd.crosstab(rec.period, rec.reannotation_class, normalize="index").round(4).to_dict(orient="index")
+    if rec.period.notna().any() else None,
 }
 (out / "reannotation_summary.json").write_text(json.dumps(summ, indent=2, ensure_ascii=False, default=str))
-print(json.dumps({k: summ[k] for k in ("genomes", "gene_categories", "start_corrections", "record_classes",
-                                        "records_with_add_A", "records_with_gb_only_unsupported",
-                                        "consensus_genes")}, indent=1, default=str))
+print(json.dumps({k: summ[k] for k in ("genomes", "gene_categories", "start_corrections", "functional_relabels",
+                                        "functional_relabel_records", "record_classes", "records_with_add_A",
+                                        "records_with_gb_only_unsupported", "consensus_genes")},
+                 indent=1, default=str))

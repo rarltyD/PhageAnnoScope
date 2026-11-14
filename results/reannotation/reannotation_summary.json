@@ -12,6 +12,19 @@
     "one_caller_function": 4110
   },
   "start_corrections": 69379,
+  "functional_relabels": 176126,
+  "functional_relabel_records": 14908,
+  "functional_relabel_by_category": {
+    "DNA, RNA and nucleotide metabolism": 44328,
+    "tail": 33941,
+    "head and packaging": 33061,
+    "other": 19148,
+    "moron, auxiliary metabolic gene and host takeover": 14419,
+    "connector": 11096,
+    "lysis": 9924,
+    "transcription regulation": 7510,
+    "integration and excision": 2699
+  },
   "record_classes": {
     "minor": 9982,
     "consistent": 6454,

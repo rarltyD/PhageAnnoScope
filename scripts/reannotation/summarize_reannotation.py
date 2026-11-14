@@ -40,7 +40,10 @@ out["table4"] = {
     "add_B": gc["add_B"], "start_corrections": summ["start_corrections"],
     "start_correction_records": int((r.start_corrections > 0).sum()),
     "consensus_genes": summ["consensus_genes"],
+    "functional_relabels": summ["functional_relabels"],
+    "functional_relabel_records": summ["functional_relabel_records"],
 }
+out["functional_relabel_by_category"] = summ["functional_relabel_by_category"]
 gu = g[g.category_rule == "gb_only_unsupported"]
 out["gb_only_unsupported_length"] = gu.length_aa.describe(percentiles=[.25, .5, .75]).round(1).to_dict()
 out["gb_only_unsupported_lt50_share"] = round(float((gu.length_aa < 50).mean()), 4)

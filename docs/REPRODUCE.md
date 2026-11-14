@@ -99,8 +99,11 @@ GenBank headers change when records are updated, so a later download can differ 
 Requires the merged run of step 5 with its PHROGs tables, and `results/record_age/genome_table.csv.gz`.
 
 ```bash
-.venv/bin/python scripts/reannotation/reannotate.py results/full_cohort results/record_age/genome_table.csv.gz results/reannotation
+.venv/bin/python scripts/reannotation/reannotate.py results/full_cohort results/reannotation \
+    --genome-table results/record_age/genome_table.csv.gz
 .venv/bin/python scripts/reannotation/summarize_reannotation.py results/reannotation results/full_cohort
 ```
 
-The run takes about a minute and up to 6 GB of memory. The figure is written to `results/reannotation/reannotation.png` (`figures/fig13_consensus_reannotation.png`).
+The run takes about a minute and up to 6 GB of memory.
+
+Genomes outside the cohort can be re-annotated the same way: run the pipeline with `phageannoscope run --diagnostic`, search PHROGs, and call `reannotate.py <run> <out> --locus-eligibility geometry` (the per-genome discordance flags are then computed from the run). The figure is written to `results/reannotation/reannotation.png` (`figures/fig13_consensus_reannotation.png`).

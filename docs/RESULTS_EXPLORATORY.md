@@ -56,12 +56,14 @@ Adjusted odds ratios (logistic GEE; reference 2020–2023 and Illumina/Ion Torre
 | Proposed additions in unannotated records | 26,717 | 716 |
 | Two-caller ORFs ≥ 100 aa absent from GenBank, no specific function | 33,423 | |
 | Start corrections | 69,379 | 12,685 |
+| Functional names proposed for CDS annotated as hypothetical | 176,126 | 14,908 |
 
 - Flagged GenBank CDS are short: median 54 aa (IQR 39–82), 43% below 50 aa, versus a median of 128 aa for all GenBank CDS.
 - Proposed additions in annotated records are mostly tail (1,981), DNA, RNA and nucleotide metabolism (1,974), head and packaging (754) and lysis proteins (580).
 - Record classes: consistent 6,454 (36.1%), minor revision 9,982 (55.9%; 4,327 with a single gene), major revision 707 (4.0%; 623 from E1 discordance, 84 from the 10% rule), unannotated 716 (4.0%). Major revision at 5% / 20%: 1,266 / 627.
 - Consistent records rise from 19.7% (≤2007) and 16.7% (2008–2011) to 47.7% (2024–2026).
 - Flags also fall on genuine genes: in the RefSeq record of phage lambda (NC_001416.1), NinD and NinE of the *nin* region are flagged because neither caller predicts them and they have no specific PHROGs function.
+- Functional names: 176,126 GenBank CDS annotated as hypothetical have a specific PHROGs function, most often DNA, RNA and nucleotide metabolism (44,328), tail (33,941) and head and packaging (33,061). The primary analysis counted 176,230 over all GenBank CDS; the difference comes from the three genomes without a submission date and CDS excluded from the comparison.
 - The consensus annotation of all records contains 2,006,768 genes.
 
 ![Consensus re-annotation](../figures/fig13_consensus_reannotation.png)
@@ -74,5 +76,5 @@ Adjusted odds ratios (logistic GEE; reference 2020–2023 and Illumina/Ion Torre
 | `results/record_age/genome_table.csv.gz` | Per genome: discordance components, submission period, relatedness block |
 | `results/record_age/gee_models.csv`, `summary.json` | Model estimates and summary |
 | `results/reannotation/records_reannotation.csv.gz` | Per record: gene-category counts, start corrections, re-annotation class |
-| `results/reannotation/gene_proposals.csv.gz` | Per gene: flagged GenBank CDS, proposed additions and start corrections with coordinates and PHROGs annotation |
+| `results/reannotation/gene_proposals.csv.gz` | Per gene: flagged GenBank CDS, proposed additions, start corrections and functional names with coordinates, GenBank product and PHROGs annotation |
 | `results/reannotation/consensus_annotation.gff3.gz` | Consensus annotation of all 17,859 records (GFF3, 1-based coordinates) |
